@@ -1,0 +1,21 @@
+﻿
+
+@foreach (var link in Model.bestRecipes)
+{
+    <div class="col-xs-6 col-sm-3 recette">
+        <a href='@Url.Action("recipesDetails",new { controller = "Recipes", nom = link.bestRecette.id })'>
+            <img src="@Url.Content("~/Content/"+link.bestRecette.picture)" alt="@link.bestRecette.name" />
+            <div class="top" title="note : @link.rate">
+                <span class="note">
+                    @for (int i = 0; i < link.rate; i++)
+                    {
+                        <span class="glyphicon glyphicon-heart"></span>
+                    }
+                </span>
+            </div>
+            <div class="bot">
+                <p class="name">@link.bestRecette.name</p>
+            </div>
+        </a>
+    </div>
+}

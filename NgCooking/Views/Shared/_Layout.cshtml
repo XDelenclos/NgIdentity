@@ -1,0 +1,153 @@
+﻿
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <title>NgCooking</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="c17 engineering" />
+    <meta name="copyright" content="c17 engineering" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />
+    <meta name="apple-mobile-web-app-title" content="c17 engineering, recettes de cuisine à partager">
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" href="~/Content/img/favicon.png" />
+    <link rel="image_src" href="~/Content/img/favicon.png" />
+    <link rel="icon" type="image/png" href="~/Content/img/favicon.png" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+    @*<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+</head>
+<!-- DEBUT DU HEADER -->
+<body>
+    <div id="wrapper">
+        <header id="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <a href="/" class="logo">
+                            <img src="~/Content/img/logo_header.png" alt="">
+                        </a>
+                        <div class="desc">
+                            <p>Partagez vos meilleures recettes avec<br />la communauté NgCooking</p>
+                            <p><a class="link" href='@Url.Action("Index", "Home")'><strong> 245 recettes</strong> à découvrir !</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="mobile-menu-btn">
+                <i class="glyphicon glyphicon-menu-hamburger"></i>
+            </button>
+        </header>
+        <!-- FIN DU HEADER-->
+        <!-- DEBUT DU MAIN -->
+        <main id="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3" id="col-nav">
+                        <button type="button" id="mobile-close-btn">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                        <div>
+                            <nav id="nav">
+                                <ul class="menu">
+                                    <li class="page_hom ">
+                                        @Html.ActionLink("Accueil", "Index", "Home")
+                                    </li>
+                                    <li class="page_rec">
+                                        @Html.ActionLink("Recettes", "recettes", "Recipes")
+                                    </li>
+                                    <li class="page_ing">
+                                        @Html.ActionLink("Ingredients", "Ingredients", "Ingredient")
+                                    </li>
+                                    <li class="page_com">
+                                        @Html.ActionLink("Communauté", "communaute", "Community")
+                                    </li>
+                                </ul>
+                                <div class="account-area">
+                                    @Html.Partial("_LoginPartial"); 
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-9">
+                        <div class="content" id="content_home">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- FIN DU MAIN-->
+        <!-- DEBUT DU FOOTER-->
+        <footer id="footer">
+            <div class="container">
+                <div class="row cuisto-img-wrap">
+                    <div class="hidden-xs col-sm-3">
+                        <div class="cuisto-img"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-9">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse optio repellat temporibus molestiae ducimus quibusdam eum maiores voluptatum sapiente reprehenderit. Est, modi, tenetur. Tempora perferendis eveniet unde numquam cupiditate nam?</p>
+                        <div class="hr"></div>
+                        <p class="copyright">copyright @@ngcooking 2015-2016</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- FIN DU FOOTER -->
+    <!--DEBUT POP IN-->
+    <div class="popin" data-popin="connect_popin">
+        <div class="popin-content">
+            <div class="popin-scroll">
+                <p class="popin-title">Connexion</p>
+                <div id="resultLog"></div>
+               
+            </div>
+            <button class="close popin-close"><span class="glyphicon glyphicon-remove"></span></button>
+        </div>
+        <div class="popin-backlayer"></div>
+    </div>
+    <div id="mobile-back-layer"></div>
+   
+                
+                
+                <!--<form action="#" id="login_Form">
+                    <p>
+                    <label for="co_user" class="fwb">Identifiant (email)</label>
+                    <input id="co_user" name="Email" class="wide" type="text" />
+                    </p>
+                    <p class="ac nm mt2">
+                        <label for="co_pwd" class="fwb">Mot de passe</label>
+                        <input id="co_pwd" name="Password" class="wide" type="text" />
+                    </p>
+                    <p class="ac nm mt2">
+                        <input type="submit" value="Connexion" class="btn btn_big btn_color1">
+                    </p>
+                     
+                    {-->
+                        
+                   <!-- })
+                   
+                </form>
+               
+    <!--FIN POP IN
+    <!--<script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="https://gist.github.com/fulv/38ab213eeac3b16adec6.js"></script>-->
+    @Scripts.Render("~/bundles/CustomScript")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+</body>
+</html>

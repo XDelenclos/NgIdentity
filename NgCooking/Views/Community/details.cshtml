@@ -1,0 +1,80 @@
+﻿@model NgCooking.Models.CommunityViewModels
+@{ Layout = "~/Views/Shared/_Layout.cshtml";}
+
+<section class="section details">
+    <div class="row">
+        <div class="col-vxs-12 col-xs-6 col-sm-5">
+            <div class="avatar-wrap">
+                <img class="avatar" src='@Url.Content("~/Content/"+Model.User.picture)' alt=@Model.User.firstname @Model.User.surname>
+            </div>
+        </div>
+        <div class="col-vxs-12 col-xs-6 col-sm-7">
+            <div class="infos">
+                <h1 class="name">@Model.User.firstname @Model.User.surname</h1>
+                <p class="level">
+                    <span class="stars">
+                        @for (int i = 0; i < Model.User.level; i++)
+                        {
+                            <span class="glyphicon glyphicon-star"></span>
+                        }
+                    </span>
+                    <span class="status">
+                        @if (Model.User.level > 2)
+                    {@("Confirmé");
+                    }
+                    else if (Model.User.level > 1)
+                    { @("Expert");
+                    }
+                    else
+                    {@("Novice");
+                    }
+                </span>
+            </p>
+            <p class="city"><span class="fwb">Ville : </span>@Model.UserAge.Utilisateur.city</p>
+            <p class="age"><span class="fwb">Age : </span>@Model.UserAge.Age ans</p>
+            <p class="shared"><span class="fwb">@Model.User.firstname</span> a partagé <span class="nb">@Model.User.Recettes.Count() recette(s)</span></p>
+            <p class="bio"><span class="fwb">BIO : </span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.Odio aspernatur fuga quisquam iusto, eum veniam vel cumque autem assumenda nulla illum accusamus, expedita animi quaerat temporibus saepe magnam, dolor minima.</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Afficher le bloc ci-dessous uniquement si l'utilisateur connecté se rend sur sa propre page -->
+<section class="section newrecette">
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="c">Vous en avez sous la toque ?!</p>
+            <p class="b">
+                <a href='@Url.Action("newRecipes", "Recipes")' class="btn btn_color1"><span class="glyphicon glyphicon-plus-sign"></span><span>Créez une nouvelle recette</span></a>
+            </p>
+        </div>
+    </div>
+</section>
+<!-- Fin bloc Ajout -->
+
+<section class="section">
+    <h2 class="title">~Les recettes de @Model.User.firstname ~</h2>
+    <div class="recettes row">
+
+        @foreach (var item in Model.RecetteUser)
+        {
+            <div class="col-xs-6 col-sm-3 recette">
+                <a href='@Url.Action("recipesDetails", "Recipes")'>
+                    <img src='@Url.Content("~/Content/"+item.picture)' alt=@item.name>
+                    <div class="top" title=@item.Comments.Average(c => c.mark)>
+                        <span class="note">
+                            @for (int i = 0; i < @item.Comments.Average(c => c.mark); i++)
+                            {
+                                <span class="glyphicon glyphicon-heart"></span>
+                            }
+                        </span>
+                    </div>
+                    <div class="bot">
+                        <p class="name">@item.name</p>
+                    </div>
+                </a>
+            </div>
+        }
+
+    </div>
+</section>

@@ -1,0 +1,52 @@
+﻿
+@model NgCooking.Models.IngredientViewModels
+
+@if (Model.ListIng != null)
+{
+    foreach (var item in Model.Result)
+    {
+
+        <div class="col-xs-12 ingredient">
+            <div class="ing-wrap">
+                <div class="top">
+                    <p class="name">@item.ingredient.name</p>
+                    <p class="category">@item.ingredient.category</p>
+                    <img class="img" src=@Url.Content("~/Content/img/ingredients/" + item.ingredient.picture) alt="@item.ingredient.name">
+                    <div class="calories-wrap">
+                        <div class="val">
+                            <span>@item.ingredient.calories kcal</span>
+                            <div class="battery">
+                                <!-- pourcentage ci-dessous à moduler en fonction du nombre de calories de l'ingredient sur nombre de calories max -->
+                                <div class="level" style="width: @item.level%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bot">
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo pariatur obcaecati ut, sit veniam molestias eius cum. Facere quibusdam laborum doloribus, incidunt omnis ipsum alias vel est molestiae.</p>
+                    <div class="list">
+                        <p class="list-title">Aliments similaires</p>
+                        <ul>
+                            @foreach (var list in item.SimIngredient)
+                            {
+                                <li class="item">
+                                    <img class="item-img" src=@Url.Content("~/Content/img/ingredients/" + list.picture) alt="@list.name">
+                                    <p class="item-name" title="@list.id">@list.name</p>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    };
+}
+else
+{
+    <div class="col-xs-12 ingredient">
+        <div class="ing-wrap">
+            <span>Aucun ingrédient ne correspond </span>;
+        </div>
+    </div>
+};
+            }

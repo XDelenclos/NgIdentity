@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <button type="button" class="button deconnect">
+        <span class="glyphicon glyphicon-off"></span>Déconnexion
+    </button>
+    <a href='@Url.Action("details", "Community")' class="button account"><span class="icon"></span>Mon profil</a>
+
+}
+else
+{    
+    @Ajax.ActionLink("Connexion", "LogOn", "Account", null, new AjaxOptions { UpdateTargetId = "resultLog", InsertionMode = InsertionMode.InsertAfter}, new { @class = "button connect", type = "button", id="PopInShow" })
+       @*<button type="button" class="button connect" data-popin-open="connect_popin"><span class="icon"></span>Connexion</button>*@
+}
